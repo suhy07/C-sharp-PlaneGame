@@ -16,9 +16,9 @@ namespace PlaneGame
         public static int score = 0;
         public static int MAX_X = 0;
         public static int MAX_Y = 0;
-        private bool enemyCreated = false;
-        bool isStrat = false;
-        bool isHide1 = false;
+        private static bool enemyCreated = false;
+        static bool isStrat = false;
+        static bool isHide1 = false;
         int select = 0;
         int[] planex0, planey0,planex1,planey1;
         int[][] ptype;
@@ -41,8 +41,9 @@ namespace PlaneGame
         int type1MAX = 2;
         int type2MAX = 5;
         int x, y;
-        static PictureBox hppb;
-        static Label hplb,sclb;
+
+        static PictureBox hppb, stpb_GAMEOVER, stpb_score, stpb_restart, stpB_plane;
+        static Label hplb,sclb, stlb_Score2, stlb_hp;
         public GameForm()
         {
             InitializeComponent();
@@ -53,6 +54,13 @@ namespace PlaneGame
             hppb = pb_Blood;
             hplb = lb_hp;
             sclb = lb_Score;
+            stpB_plane = pB_plane;
+            stlb_Score2 = lb_Score2;
+            stpb_GAMEOVER = pb_GAMEOVER;
+            stpb_score = pb_score;
+            stpb_restart = pb_restart;
+            stlb_hp = lb_hp;
+
             lb_Score.Text = "0";
             MAX_X = panel1.Width-pB_plane.Width;
             MAX_Y = panel1.Height-pB_plane.Height;
@@ -141,7 +149,7 @@ namespace PlaneGame
         private void InitEnemyCreate()
         {
             enemyCreated = true;
-            while (true)
+            while (enemyCreated)
             {
                 Thread.Sleep(3200);
 
@@ -364,7 +372,14 @@ namespace PlaneGame
                 return;
             x = pB_plane.Location.X;
             y = pB_plane.Location.Y;
-           
+
+            if (e.KeyCode == Keys.Escape)
+            {
+                RestGame();
+                Show1();
+                panel1.Refresh();
+            }
+
             char key = (char)e.KeyValue;
             switch (key) 
             {
@@ -475,7 +490,6 @@ namespace PlaneGame
             }
             planeLocation = pB_plane.Location;
             pB_plane.Refresh();
-            //Console.WriteLine("moveStop");
         }
         public static Point planeLocation;
         public static Size planeSize;
@@ -507,28 +521,19 @@ namespace PlaneGame
                 if (!(bullet.Location.Y > 0))
                     timer.Stop();
             };
-
             timer.Start();
-            /*
-            while (bullet.Location.Y > 0)
-            {
-                int y = bullet.Location.Y;
-                int x = bullet.Location.X;
-                Thread.Sleep(24);
-                panel1.BeginInvoke((MethodInvoker)delegate ()
-                {
-                    bullet.SizeMode = PictureBoxSizeMode.AutoSize;
-                    bullet.Location = new Point(x, bullet.Location.Y - bulletSpeed < 0 ? 0 : bullet.Location.Y - bulletSpeed);
-                    bullet.Refresh();
-              
-                });
-            }*/
             if (buttleNum >= maxBulletNum)
             {
                 Thread.Sleep(1000);
                 buttleNum = 0;
             }
         }
+
+        private void pb_restart_Click(object sender, EventArgs e)
+        {
+            RestGame();
+        }
+
         private void BulletTread2()
         {
             Bullet bullet1 = new Bullet(select - 1, planefire);
@@ -567,24 +572,6 @@ namespace PlaneGame
                     timer.Stop();
             };
             timer.Start();
-            /*
-            while (bullet1.Location.Y > 0)
-            {
-                int y = bullet1.Location.Y;
-                int x = bullet1.Location.X;
-                int x1 = bullet2.Location.X;
-                Thread.Sleep(24);
-                panel1.BeginInvoke((MethodInvoker)delegate ()
-                {
-                    bullet1.SizeMode = PictureBoxSizeMode.AutoSize;
-                    bullet1.Location = new Point(x, bullet1.Location.Y - bulletSpeed < 0 ? 0 : bullet1.Location.Y - bulletSpeed);
-                    bullet1.Refresh();
-                    bullet2.SizeMode = PictureBoxSizeMode.AutoSize;
-                    bullet2.Location = new Point(x1, bullet1.Location.Y - bulletSpeed < 0 ? 0 : bullet1.Location.Y - bulletSpeed);
-                    bullet2.Refresh();
-
-                });
-            }*/
             if (buttleNum >= maxBulletNum)
             {
                 Thread.Sleep(1000);
@@ -641,31 +628,7 @@ namespace PlaneGame
                     timer.Stop();
             };
             timer.Start();
-            /*
-            while (bullet3.Location.Y > 0)
-            {
-                int y = bullet1.Location.Y;
-                int x = bullet1.Location.X;
-                int x1 = bullet2.Location.X;
-                int x2 = bullet3.Location.X;
-                Thread.Sleep(24);
-                panel1.BeginInvoke((MethodInvoker)delegate ()
-                {
-                    bullet3.SizeMode = PictureBoxSizeMode.AutoSize;
-                    bullet3.Location = new Point(x2, bullet1.Location.Y - bulletSpeed < 0 ? 0 : bullet1.Location.Y - bulletSpeed);
-                    bullet3.Refresh();
-                    bullet1.SizeMode = PictureBoxSizeMode.AutoSize;
-                    bullet1.Location = new Point(x+bulletSpeed, bullet1.Location.Y - bulletSpeed < 0 ? 0 : bullet1.Location.Y - bulletSpeed);
-                    bullet1.Refresh();
-                    bullet2.SizeMode = PictureBoxSizeMode.AutoSize;
-                    bullet2.Location = new Point(x1-bulletSpeed, bullet1.Location.Y - bulletSpeed < 0 ? 0 : bullet1.Location.Y - bulletSpeed);
-                    bullet2.Refresh();
-                    x = bullet1.Location.X;
-                    x1 = bullet2.Location.X;
-                    x2 = bullet3.Location.X;
 
-                });
-            }*/
             if (buttleNum >= maxBulletNum)
             {
                 Thread.Sleep(1000);
@@ -692,19 +655,21 @@ namespace PlaneGame
         public static void PlaneBeHint(int hit)
         {
             planehp -= hit;
+            double x = ((1.0 * planehp) / planeMAXhp);
             panel.BeginInvoke((MethodInvoker)delegate ()
             {
                 panel.Refresh();
-                double x =( (1.0 * planehp) / planeMAXhp);
+
                 //Console.WriteLine(x);
                 if (x > 0)
                 {
                     hppb.Width = (int)(bw * x);
                     hplb.Text = (int)(x*100) + "%";
                 }
-                
+                if (x <= 0)
+                    GameFinish();
+
             });
-           
         }
         public static void AddScore(int _score)
         {
@@ -715,6 +680,36 @@ namespace PlaneGame
 
             });
 
+        }
+        private static void GameFinish()
+        {
+            isStrat = false;
+            enemyCreated = false;
+            isHide1 = false;
+            panel.Refresh();
+            stlb_Score2.Text = score + "";
+            stlb_Score2.Show();
+            stpb_GAMEOVER.Show();
+            stpb_score.Show();
+            stpb_restart.Show();
+            stlb_hp.Hide();
+        }
+        private static void RestGame()
+        {
+            isStrat = false;
+            enemyCreated = false;
+            isHide1 = false;
+            score = 0;
+            stlb_Score2.Hide();
+            stpb_GAMEOVER.Hide();
+            stpb_score.Hide();
+            stpb_restart.Hide();
+            stpB_plane.Hide();
+            hplb.Hide();
+            hppb.Hide();
+            SoundPlayer simpleSound = new SoundPlayer(Properties.Resources.background1);
+            simpleSound.PlayLooping();
+            //Show1();
         }
     }
 }

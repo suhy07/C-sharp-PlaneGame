@@ -331,6 +331,7 @@ namespace PlaneGame
         ~Enemy()
         {
             isDispose = true;
+            if(!hpPictureBox.IsDisposed)
             hpPictureBox.Dispose();
             Program.RmEmery(this);
         }

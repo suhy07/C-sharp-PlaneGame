@@ -221,6 +221,9 @@
     <None Include="Resources\background.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\score.png" />
+    <None Include="Resources\Restart.png" />
+    <None Include="Resources\GAMEOVER.png" />
     <None Include="Resources\tf5.png" />
     <None Include="Resources\tf4.png" />
     <None Include="Resources\ft1.png" />

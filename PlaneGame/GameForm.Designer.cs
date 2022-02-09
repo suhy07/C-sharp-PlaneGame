@@ -32,6 +32,14 @@ namespace PlaneGame
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pb_restart = new System.Windows.Forms.PictureBox();
+            this.lb_Score2 = new System.Windows.Forms.Label();
+            this.pb_score = new System.Windows.Forms.PictureBox();
+            this.pb_GAMEOVER = new System.Windows.Forms.PictureBox();
+            this.lb_Score = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.lb_hp = new System.Windows.Forms.Label();
+            this.pb_Blood = new System.Windows.Forms.PictureBox();
             this.lv5 = new System.Windows.Forms.PictureBox();
             this.lv4 = new System.Windows.Forms.PictureBox();
             this.lv3 = new System.Windows.Forms.PictureBox();
@@ -54,11 +62,11 @@ namespace PlaneGame
             this.pb_plane2 = new System.Windows.Forms.PictureBox();
             this.pb_plane1 = new System.Windows.Forms.PictureBox();
             this.pB_plane = new System.Windows.Forms.PictureBox();
-            this.pb_Blood = new System.Windows.Forms.PictureBox();
-            this.lb_hp = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lb_Score = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_restart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_score)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GAMEOVER)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Blood)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lv5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lv4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lv3)).BeginInit();
@@ -81,12 +89,15 @@ namespace PlaneGame
             ((System.ComponentModel.ISupportInitialize)(this.pb_plane2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_plane1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pB_plane)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_Blood)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.panel1.Controls.Add(this.pb_restart);
+            this.panel1.Controls.Add(this.lb_Score2);
+            this.panel1.Controls.Add(this.pb_score);
+            this.panel1.Controls.Add(this.pb_GAMEOVER);
             this.panel1.Controls.Add(this.lb_Score);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.lb_hp);
@@ -120,6 +131,95 @@ namespace PlaneGame
             this.panel1.Size = new System.Drawing.Size(655, 814);
             this.panel1.TabIndex = 1;
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            // 
+            // pb_restart
+            // 
+            this.pb_restart.Image = global::PlaneGame.Properties.Resources.Restart;
+            this.pb_restart.Location = new System.Drawing.Point(215, 438);
+            this.pb_restart.Name = "pb_restart";
+            this.pb_restart.Size = new System.Drawing.Size(220, 56);
+            this.pb_restart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_restart.TabIndex = 32;
+            this.pb_restart.TabStop = false;
+            this.pb_restart.Visible = false;
+            this.pb_restart.Click += new System.EventHandler(this.pb_restart_Click);
+            // 
+            // lb_Score2
+            // 
+            this.lb_Score2.AutoSize = true;
+            this.lb_Score2.Font = new System.Drawing.Font("宋体", 27F);
+            this.lb_Score2.Location = new System.Drawing.Point(349, 342);
+            this.lb_Score2.Name = "lb_Score2";
+            this.lb_Score2.Size = new System.Drawing.Size(204, 45);
+            this.lb_Score2.TabIndex = 31;
+            this.lb_Score2.Text = "23213890";
+            this.lb_Score2.Visible = false;
+            // 
+            // pb_score
+            // 
+            this.pb_score.Image = global::PlaneGame.Properties.Resources.score;
+            this.pb_score.Location = new System.Drawing.Point(174, 344);
+            this.pb_score.Name = "pb_score";
+            this.pb_score.Size = new System.Drawing.Size(141, 43);
+            this.pb_score.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_score.TabIndex = 30;
+            this.pb_score.TabStop = false;
+            this.pb_score.Visible = false;
+            // 
+            // pb_GAMEOVER
+            // 
+            this.pb_GAMEOVER.Image = global::PlaneGame.Properties.Resources.GAMEOVER;
+            this.pb_GAMEOVER.Location = new System.Drawing.Point(198, 174);
+            this.pb_GAMEOVER.Name = "pb_GAMEOVER";
+            this.pb_GAMEOVER.Size = new System.Drawing.Size(231, 42);
+            this.pb_GAMEOVER.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_GAMEOVER.TabIndex = 29;
+            this.pb_GAMEOVER.TabStop = false;
+            this.pb_GAMEOVER.Visible = false;
+            // 
+            // lb_Score
+            // 
+            this.lb_Score.AutoSize = true;
+            this.lb_Score.Font = new System.Drawing.Font("宋体", 15F);
+            this.lb_Score.Location = new System.Drawing.Point(110, 14);
+            this.lb_Score.Name = "lb_Score";
+            this.lb_Score.Size = new System.Drawing.Size(116, 25);
+            this.lb_Score.TabIndex = 28;
+            this.lb_Score.Text = "23213890";
+            this.lb_Score.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("宋体", 15F);
+            this.label1.Location = new System.Drawing.Point(14, 14);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(90, 25);
+            this.label1.TabIndex = 27;
+            this.label1.Text = "SCORE:";
+            this.label1.Visible = false;
+            // 
+            // lb_hp
+            // 
+            this.lb_hp.AutoSize = true;
+            this.lb_hp.Font = new System.Drawing.Font("宋体", 15F);
+            this.lb_hp.Location = new System.Drawing.Point(22, 767);
+            this.lb_hp.Name = "lb_hp";
+            this.lb_hp.Size = new System.Drawing.Size(64, 25);
+            this.lb_hp.TabIndex = 26;
+            this.lb_hp.Text = "100%";
+            this.lb_hp.Visible = false;
+            // 
+            // pb_Blood
+            // 
+            this.pb_Blood.Image = global::PlaneGame.Properties.Resources.blood;
+            this.pb_Blood.Location = new System.Drawing.Point(115, 752);
+            this.pb_Blood.Name = "pb_Blood";
+            this.pb_Blood.Size = new System.Drawing.Size(527, 40);
+            this.pb_Blood.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pb_Blood.TabIndex = 24;
+            this.pb_Blood.TabStop = false;
+            this.pb_Blood.Visible = false;
             // 
             // lv5
             // 
@@ -367,50 +467,6 @@ namespace PlaneGame
             this.pB_plane.TabStop = false;
             this.pB_plane.Visible = false;
             // 
-            // pb_Blood
-            // 
-            this.pb_Blood.Image = global::PlaneGame.Properties.Resources.blood;
-            this.pb_Blood.Location = new System.Drawing.Point(115, 752);
-            this.pb_Blood.Name = "pb_Blood";
-            this.pb_Blood.Size = new System.Drawing.Size(527, 40);
-            this.pb_Blood.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pb_Blood.TabIndex = 24;
-            this.pb_Blood.TabStop = false;
-            this.pb_Blood.Visible = false;
-            // 
-            // lb_hp
-            // 
-            this.lb_hp.AutoSize = true;
-            this.lb_hp.Font = new System.Drawing.Font("宋体", 15F);
-            this.lb_hp.Location = new System.Drawing.Point(22, 767);
-            this.lb_hp.Name = "lb_hp";
-            this.lb_hp.Size = new System.Drawing.Size(64, 25);
-            this.lb_hp.TabIndex = 26;
-            this.lb_hp.Text = "100%";
-            this.lb_hp.Visible = false;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 15F);
-            this.label1.Location = new System.Drawing.Point(22, 14);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(90, 25);
-            this.label1.TabIndex = 27;
-            this.label1.Text = "SCORE:";
-            this.label1.Visible = false;
-            // 
-            // lb_Score
-            // 
-            this.lb_Score.AutoSize = true;
-            this.lb_Score.Font = new System.Drawing.Font("宋体", 15F);
-            this.lb_Score.Location = new System.Drawing.Point(110, 14);
-            this.lb_Score.Name = "lb_Score";
-            this.lb_Score.Size = new System.Drawing.Size(116, 25);
-            this.lb_Score.TabIndex = 28;
-            this.lb_Score.Text = "23213890";
-            this.lb_Score.Visible = false;
-            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -432,6 +488,10 @@ namespace PlaneGame
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyUp);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_restart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_score)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_GAMEOVER)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pb_Blood)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lv5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lv4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lv3)).EndInit();
@@ -454,7 +514,6 @@ namespace PlaneGame
             ((System.ComponentModel.ISupportInitialize)(this.pb_plane2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pb_plane1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pB_plane)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_Blood)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -488,6 +547,10 @@ namespace PlaneGame
         private PictureBox pb_Blood;
         private Label lb_Score;
         private Label label1;
+        private PictureBox pb_score;
+        private PictureBox pb_GAMEOVER;
+        private Label lb_Score2;
+        private PictureBox pb_restart;
     }
 }
 
